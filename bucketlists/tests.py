@@ -28,10 +28,9 @@ class BucketlistViewTestCase(TestCase):
         user = User.objects.create(username="CuppyCake")
         self.client = APIClient()
         self.client.force_authenticate(user=user)
-        self.bucketlist_data = {'name': 'Have no regrets',
-                                'owner': user.id}
+        self.bucketlist_data = {'name': 'Have no regrets', 'owner': user.id}
         self.response = self.client.post(
-            reverse('create'),
+            reverse('bucketlists:create'),
             self.bucketlist_data,
             format="json"
         )
@@ -67,7 +66,7 @@ class BucketlistViewTestCase(TestCase):
         bucketlist = Bucketlist.objects.get()
         change_bucketlist = {'name': 'new_test_name'}
         response = self.client.put(
-            reverse('details',
+            reverse('bucketlists:details',
                     kwargs={'pk': bucketlist.id}),
             change_bucketlist,
             format="json"
@@ -79,7 +78,7 @@ class BucketlistViewTestCase(TestCase):
         """Test the api can delete a bucketlist"""
         bucketlist = Bucketlist.objects.get()
         response = self.client.delete(
-            reverse('details',
+            reverse('bucketlists:details',
                     kwargs={'pk': bucketlist.id}),
             format="json",
             follow=True
