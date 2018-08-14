@@ -43,8 +43,8 @@ class BucketlistViewTestCase(TestCase):
         """Test the api has authorization"""
         new_client = APIClient()
         reponse = new_client.get(
-            '/bucketlists',
-            kwargs={'pk': 3},
+            reverse('bucketlists:details',
+                    kwargs={'pk': 1}),
             format="json"
         )
         self.assertEqual(reponse.status_code, status.HTTP_403_FORBIDDEN)
@@ -53,8 +53,8 @@ class BucketlistViewTestCase(TestCase):
         """Test the api can retrieve a bucketlist"""
         bucketlist = Bucketlist.objects.get()
         response = self.client.get(
-            '/bucketlists/',
-            kwargs={'pk': bucketlist.id},
+            reverse('bucketlists:details',
+                    kwargs={'pk': bucketlist.id}),
             format="json"
         )
 
