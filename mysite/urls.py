@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('polls/', include(('polls.urls', 'polls'), namespace="polls")),
     path('bucketlists/', include(('bucketlists.urls', 'bucketlists'), namespace="bucketlists")),
+    re_path(r'^auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
