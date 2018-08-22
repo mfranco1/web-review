@@ -41,10 +41,12 @@ class BucketlistViewTestCase(TestCase):
 
     def test_authorization_enforced(self):
         """Test the api has authorization"""
+        new_user = User.objects.create(username="newguy")
         new_client = APIClient()
+        new_client.force_authenticate(user=new_user)
         reponse = new_client.get(
             reverse('bucketlists:details',
-                    kwargs={'pk': 1}),
+                    kwargs={'pk': 2}),
             format="json"
         )
         self.assertEqual(reponse.status_code, status.HTTP_403_FORBIDDEN)
