@@ -72,16 +72,56 @@ class Board extends React.Component {
   }
 }
 
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: new Date()
+    };
+  }
+
+  tick() {
+    this.setState({
+      date: new Date()
+    });
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Local Time</h1>
+        <h2>{this.state.date.toLocaleTimeString()}</h2>
+      </div>
+    );
+  }
+}
+
 class Game extends React.Component {
   render() {
     return (
-      <div className="game">
-        <div className="game-board">
-          <Board />
+      <div>
+        <div className="game-timer">
+          <Clock />
         </div>
-        <div className="game-info">
-          <div>{/* status */}</div>
-          <ol>{/* TODO */}</ol>
+        <div className="game-body">
+          <div className="game-board">
+            <Board />
+          </div>
+          <div className="game-info">
+            <div>{/* status */}</div>
+            <ol>{/* TODO */}</ol>
+          </div>
         </div>
       </div>
     );
