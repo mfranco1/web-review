@@ -59,6 +59,31 @@ target/
 __pycache__/
 local_settings.py
 
+### Node ###
+node_modules
+scripts/flow/*/.flowconfig
+*~
+.grunt
+_SpecRunner.html
+__benchmarks__
+build/
+remote-repo/
+coverage/
+.module-cache
+fixtures/dom/public/react-dom.js
+fixtures/dom/public/react.js
+test/the-files-to-test.generated.js
+*.log*
+chrome-user-data
+*.sublime-project
+*.sublime-workspace
+.idea
+*.iml
+.vscode
+*.swp
+*.swo
+
+#extra
 .env
 db.sqlite3
 dump.json

@@ -1,11 +1,15 @@
 from django.shortcuts import render, get_object_or_404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from .models import Question
 
 def index(request):
-    latest_questions = Question.objects.order_by('-publish_date')[:5]
-    context = {'latest_questions': latest_questions}
+    latest_questions = Question.objects.order_by('-publish_date')
+    paginator = Paginator(latest_questions, 5)
+
+    page = request.GET.get('page')
+    context = {'latest_questions': paginator.get_page(page)}
     return render(request, 'polls/index.html', context)
 
 def detail(request, question_id):
